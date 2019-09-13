@@ -8,13 +8,12 @@ jobs:
     runs-on: macOS-latest
     strategy:
         matrix:
-          destination: ['platform=macOS,OS=10.12]
+          destination: ['platform=macOS,OS=10.12']
     steps:
       - name: Checkout
         uses: actions/checkout@master
       - name: Build and test
         run: |
-          cd JsonWriter
           xcodebuild clean test -project JsonWriter.xcodeproj -scheme JsonWriter -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
           bash <(curl -s https://codecov.io/bash)
         env: 
